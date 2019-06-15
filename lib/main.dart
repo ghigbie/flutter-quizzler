@@ -33,6 +33,8 @@ class _QuizPageState extends State<QuizPage> {
   'Approximately one quarter of human bones are in the feet.',
   'A slug\'s blood is green.',
   ];
+  List <bool> answers = [false, true, false];
+
   int questionIndex = 0;
   @override
   Widget build(BuildContext context) {
