@@ -78,7 +78,7 @@ class _QuizPageState extends State<QuizPage> {
                      color: Colors.green,
                   ),
                 );
-                if(questionIndex >= 2){
+                if(questionIndex <= 2){
                   questionIndex++;
                 }
                 });
@@ -107,7 +107,7 @@ class _QuizPageState extends State<QuizPage> {
                      color: Colors.red,
                   ),
                 );
-                if(questionIndex >= 2){
+                if(questionIndex <= 2){
                   questionIndex++;
                 }
               });
