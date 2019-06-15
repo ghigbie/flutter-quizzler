@@ -1,0 +1,1 @@
+const BUTTON_PADDING = 15.0;
