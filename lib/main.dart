@@ -73,17 +73,22 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 print('The user picked true!');
-                setState(() {
-                  scoreKeeper.add(
-                    Icon(
-                     Icons.check,
-                     color: Colors.green,
-                  ),
-                );
-                if(questionIndex <= 2){
-                  questionIndex++;
+                bool selectedAnswer = true;
+                bool correctAnswer = answers[questionIndex];
+                  if(correctAnswer == selectedAnswer){
+                  setState(() {
+                    scoreKeeper.add(
+                      Icon(
+                      Icons.check,
+                      color: Colors.green,
+                    ),
+                  );
+                  
+                  if(questionIndex <= 2){
+                    questionIndex++;
+                  }
+                  });
                 }
-                });
               },
             ),
           ),
@@ -102,6 +107,9 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 print('The user picked false');
+                bool selectedAnswer = false;
+                bool correctAnswer = answers[questionIndex];
+                if(correctAnswer == selectedAnswer){
                 setState(() {
                   scoreKeeper.add(
                     Icon(
@@ -109,10 +117,11 @@ class _QuizPageState extends State<QuizPage> {
                      color: Colors.red,
                   ),
                 );
-                if(questionIndex <= 2){
-                  questionIndex++;
+                  if(questionIndex <= 2){
+                    questionIndex++;
+                  }
+                 });
                 }
-              });
               }
             ),
           ),
