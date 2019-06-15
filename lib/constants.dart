@@ -1,1 +1,2 @@
 const BUTTON_PADDING = 15.0;
+const FONT_SIZE = 20.0;
