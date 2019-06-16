@@ -30,9 +30,8 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
 
   List <Icon> scoreKeeper = [];
-  int questionNumber= 0;
   QuizBrain quizBrain = QuizBrain();
-  
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,7 +44,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(APP_PADDING),
             child: Center(
               child: Text(
-                quizBrain.getQuestionText(questionNumber),
+                quizBrain.getQuestionText(quizBrain.getQuestionNumber()),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: QUESTION_FONT_SIZE,
@@ -71,19 +70,16 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 print('The user picked true!');
                 bool selectedAnswer = true;
-                bool correctAnswer = quizBrain.getQuestionAnswer(questionNumber);
+                bool correctAnswer = quizBrain.getQuestionAnswer(quizBrain.getQuestionNumber());
                   if(correctAnswer == selectedAnswer){
                   setState(() {
+                    quizBrain.nextQuestion();
                     scoreKeeper.add(
                       Icon(
                       Icons.check,
                       color: Colors.green,
                     ),
                   );
-                  
-                  if(questionNumber <= 2){
-                    questionNumber++;
-                  }
                   });
                 }
               },
@@ -105,18 +101,16 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 print('The user picked false');
                 bool selectedAnswer = false;
-                bool correctAnswer = quizBrain.getQuestionAnswer(questionNumber);
+                bool correctAnswer = quizBrain.getQuestionAnswer();
                 if(correctAnswer == selectedAnswer){
                 setState(() {
+                  quizBrain.nextQuestion();
                   scoreKeeper.add(
                     Icon(
                      Icons.close,
                      color: Colors.red,
                   ),
                 );
-                  if(questionNumber <= 2){
-                    questionNumber++;
-                  }
                  });
                 }
               }
