@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler_flutter/quiz_brain.dart';
 import 'question.dart';
 import 'constants.dart';
+import 'quiz_brain.dart';
 
 void main() => runApp(Quizzler());
 
@@ -12,7 +14,7 @@ class Quizzler extends StatelessWidget {
         backgroundColor: Colors.grey.shade900,
         body: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            padding: EdgeInsets.symmetric(horizontal: APP_PADDING),
             child: QuizPage(),
           ),
         ),
@@ -30,12 +32,8 @@ class _QuizPageState extends State<QuizPage> {
 
   List <Icon> scoreKeeper = [];
   int questionIndex = 0;
-  List <Question> questionBank = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(q: 'Approximately one quarter of human bones are in the feet.', a: true),
-    Question(q: 'A slug\'s blood is green.', a: false),
-  ];
-
+  QuizBrain quizBrain = QuizBrain();
+  
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,13 +43,13 @@ class _QuizPageState extends State<QuizPage> {
         Expanded(
           flex: 5,
           child: Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(APP_PADDING),
             child: Center(
               child: Text(
-                questions[questionIndex],
+                quizBrain.questionBank[questionIndex].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 25.0,
+                  fontSize: QUESTION_FONT_SIZE,
                   color: Colors.white,
                 ),
               ),
@@ -60,7 +58,7 @@ class _QuizPageState extends State<QuizPage> {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: EdgeInsets.all(BUTTON_PADDING),
             child: FlatButton(
               textColor: Colors.white,
               color: Colors.green,
@@ -68,13 +66,13 @@ class _QuizPageState extends State<QuizPage> {
                 'True',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20.0,
+                  fontSize: FONT_SIZE,
                 ),
               ),
               onPressed: () {
                 print('The user picked true!');
                 bool selectedAnswer = true;
-                bool correctAnswer = answers[questionIndex];
+                bool correctAnswer = quizBrain.questionBank[questionIndex].quesitonAnswer;
                   if(correctAnswer == selectedAnswer){
                   setState(() {
                     scoreKeeper.add(
@@ -95,20 +93,20 @@ class _QuizPageState extends State<QuizPage> {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: EdgeInsets.all(BUTTON_PADDING),
             child: FlatButton(
               color: Colors.red,
               child: Text(
                 'False',
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: FONT_SIZE,
                   color: Colors.white,
                 ),
               ),
               onPressed: () {
                 print('The user picked false');
                 bool selectedAnswer = false;
-                bool correctAnswer = answers[questionIndex];
+                bool correctAnswer = quizBrain.questionBank[questionIndex].quesitonAnswer;
                 if(correctAnswer == selectedAnswer){
                 setState(() {
                   scoreKeeper.add(
