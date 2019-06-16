@@ -29,14 +29,13 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
 
   List <Icon> scoreKeeper = [];
-  static Question q1 = Question(q: 'You can lead a cow down stairs but not up stairs.', a: false);
-  static Question q2 = Question(q: 'Approximately one quarter of human bones are in the feet.', a: true);
-  static Question q3 = Question(q: 'A slug\'s blood is green.', a: false);
-  List <Question> questions = [q1, q2, q3];
-
-  List <bool> answers = [false, true, false];
-
   int questionIndex = 0;
+  List <Question> questionBank = [
+    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
+    Question(q: 'Approximately one quarter of human bones are in the feet.', a: true),
+    Question(q: 'A slug\'s blood is green.', a: false),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
