@@ -24,4 +24,8 @@ class QuizBrain {
   bool getQuestionAnswer(int questionNumber){
     return _questionBank[questionNumber].quesitonAnswer;
   }
+
+  void createNewQuestion(String questionInput, bool answerInput){
+    _questionBank.add(Question(questionInput, answerInput));
+  }
 }
