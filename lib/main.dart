@@ -30,7 +30,7 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
 
   List <Icon> scoreKeeper = [];
-  int questionIndex = 0;
+  int questionNumber= 0;
   QuizBrain quizBrain = QuizBrain();
   
   @override
@@ -45,7 +45,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(APP_PADDING),
             child: Center(
               child: Text(
-                quizBrain.questionBank[questionIndex].questionText,
+                quizBrain.getQuestionText(questionNumber),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: QUESTION_FONT_SIZE,
@@ -71,7 +71,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 print('The user picked true!');
                 bool selectedAnswer = true;
-                bool correctAnswer = quizBrain.questionBank[questionIndex].quesitonAnswer;
+                bool correctAnswer = quizBrain.getQuestionAnswer(questionNumber);
                   if(correctAnswer == selectedAnswer){
                   setState(() {
                     scoreKeeper.add(
@@ -81,8 +81,8 @@ class _QuizPageState extends State<QuizPage> {
                     ),
                   );
                   
-                  if(questionIndex <= 2){
-                    questionIndex++;
+                  if(questionNumber <= 2){
+                    questionNumber++;
                   }
                   });
                 }
@@ -105,7 +105,7 @@ class _QuizPageState extends State<QuizPage> {
               onPressed: () {
                 print('The user picked false');
                 bool selectedAnswer = false;
-                bool correctAnswer = quizBrain.questionBank[questionIndex].quesitonAnswer;
+                bool correctAnswer = quizBrain.getQuestionAnswer(questionNumber);
                 if(correctAnswer == selectedAnswer){
                 setState(() {
                   scoreKeeper.add(
@@ -114,8 +114,8 @@ class _QuizPageState extends State<QuizPage> {
                      color: Colors.red,
                   ),
                 );
-                  if(questionIndex <= 2){
-                    questionIndex++;
+                  if(questionNumber <= 2){
+                    questionNumber++;
                   }
                  });
                 }
@@ -131,8 +131,3 @@ class _QuizPageState extends State<QuizPage> {
   }
 }
 
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
