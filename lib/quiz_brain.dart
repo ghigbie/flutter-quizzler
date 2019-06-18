@@ -19,11 +19,6 @@ class QuizBrain {
     Question('In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',true),
   ];
 
-  void nextQuestion(){
-    if(_questionNumber < _questionBank.length -1){
-      _questionNumber++;
-    }
-  }
   int getQuestionBankLength(){
     return _questionBank.length;
   }
@@ -43,4 +38,12 @@ class QuizBrain {
   void createNewQuestion(String questionInput, bool answerInput){
     _questionBank.add(Question(questionInput, answerInput));
   }
+
+  bool isFinished() => _questionNumber == _questionBank.length-1 ? true : false;
+
+  void reset(){
+    _questionNumber = 0;
+  }
+
+  
 }
