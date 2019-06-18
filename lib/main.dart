@@ -33,6 +33,7 @@ class _QuizPageState extends State<QuizPage> {
   List <Icon> scoreKeeper = [];
   QuizBrain quizBrain = QuizBrain();
 
+  
   void checkAnswer(bool userPickedAnswer){
     bool correctAnswer = quizBrain.getQuestionAnswer();
   
@@ -45,11 +46,29 @@ class _QuizPageState extends State<QuizPage> {
         print('User got it wrong');
         scoreKeeper.add(Icon(Icons.close, color: Colors.red));
       }
+      quizBrain.nextQuestion();
     }else{
       scoreKeeper = [];
+      //Widget below
+      Alert(
+        context: context,
+        type: AlertType.warning,
+        title: "End of Game",
+        desc: "Play again?",
+        buttons: [
+          DialogButton(
+            child: Text(
+              "Replay",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+            onPressed: () => Navigator.pop(context),
+            color: Colors.green
+          ),]
+      ).show();
+      //Widget above
       quizBrain.reset();
-    }
-    });
+      }
+      });
   }
 
   void nextQuestion(){
@@ -95,7 +114,6 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                checkAnswer(true);
-               nextQuestion();
               }
             ),
           ),
@@ -114,14 +132,13 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 checkAnswer(false);
-                nextQuestion();
               }
             ),
           ),
         ),
         Row(
           children: scoreKeeper,
-        )
+        ),
       ],
     );
   }
