@@ -24,6 +24,9 @@ class QuizBrain {
       _questionNumber++;
     }
   }
+  int getQuestionBankLength(){
+    return _questionBank.length;
+  }
 
   int getQuestionNumber(){
     return _questionNumber;
