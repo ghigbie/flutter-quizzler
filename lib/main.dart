@@ -52,7 +52,7 @@ class _QuizPageState extends State<QuizPage> {
       //Widget below
       Alert(
         context: context,
-        type: AlertType.warning,
+        type: AlertType.info,
         title: "End of Game",
         desc: "Play again?",
         buttons: [
